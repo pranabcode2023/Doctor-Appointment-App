@@ -7,13 +7,14 @@ import { Link, useNavigate } from "react-router-dom";
 const Register = () => {
   const navigate = useNavigate();
   // registration from controll
+
   const onfinishHandler = async (values) => {
     try {
       const res = await axios.post(
-        "http://localhsot:8080/api/v1/user/register",
+        "http://localhost:8080/api/v1/user/register",
         values
       );
-
+      console.log(res);
       if (res.data.success) {
         message.success("Registration Successfull");
         navigate("/login");
