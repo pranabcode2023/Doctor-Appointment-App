@@ -25,6 +25,12 @@ const registerController = async (req, res) => {
     // new User
 
     const newUser = new userModel(req.body);
+    //or anther method
+    // const newUser = new userModel({
+    //   name: req.body.name,
+    //   email: req.body.email,
+    //   password: hashedPassword,
+    // });
     await newUser.save();
     res
       .status(201)
