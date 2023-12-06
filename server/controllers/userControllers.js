@@ -1,7 +1,6 @@
 const userModel = require("../models/userModels");
 const bcrypt = require("bcryptjs");
-
-const loginController = () => {};
+const jwt = require("jsonwebtoken");
 
 // register controller
 const registerController = async (req, res) => {
@@ -41,6 +40,43 @@ const registerController = async (req, res) => {
       success: false,
       message: `Register Controller Error ${error.message}`,
     });
+  }
+};
+
+// Login controller
+const loginController = async (req, res) => {
+  try {
+    // filter for checking user
+    const user = await userModel.findOne({ email: req.body.email });
+
+    if (!user) {
+      return res
+        .status(200)
+        .send({ message: "user not found", success: false });
+    }
+
+    // filter for compare password and decryption of password
+
+    const password = await bcrypt.compare(req.body.password, user.password);
+    if (!password) {
+      return res
+        .status(200)
+        .send({ message: "Email or Password wrong", success: false });
+    }
+
+    // if there is user and password then generate token for user to secure our app
+
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+      expireIn: "1d",
+    });
+    res
+      .status(200)
+      .send({ message: "Login successfull", sucess: true, token: token });
+  } catch (error) {
+    console.log(error);
+    res
+      .status(500)
+      .send({ message: `Error in login controller ${error.message}` });
   }
 };
 
