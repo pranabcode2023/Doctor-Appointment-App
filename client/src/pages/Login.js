@@ -17,7 +17,6 @@ const Login = () => {
       console.log(res);
       if (res.data.success) {
         //generate token & save into localstorage
-
         localStorage.setItem("token", res.data.token);
         message.success("Login Successfull");
         // navigate to Homepage
