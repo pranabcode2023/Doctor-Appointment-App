@@ -2,10 +2,10 @@ const jwt = require("jsonwebtoken");
 
 const authMiddleware = async (req, res, next) => {
   try {
-    const token = req.headers["authorization"].split("")[1];
+    const token = req.headers["authorization"].split(" ")[1];
     jwt.verify(token, process.env.JWT_SECRET, (error, decode) => {
       if (error) {
-        return res.status(401).send({
+        return res.status(200).send({
           message: "Error in token middleware",
           success: false,
         });
@@ -16,7 +16,7 @@ const authMiddleware = async (req, res, next) => {
     });
   } catch (error) {
     console.log(error);
-    res.status(500).send({
+    res.status(401).send({
       message: "Authorization failed",
     });
   }
