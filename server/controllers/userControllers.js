@@ -52,7 +52,7 @@ const loginController = async (req, res) => {
     if (!user) {
       return res
         .status(200)
-        .send({ message: "user not found", success: false });
+        .send({ message: "User not found", success: false });
     }
 
     // filter for compare password and decryption of password
@@ -61,17 +61,17 @@ const loginController = async (req, res) => {
     if (!password) {
       return res
         .status(200)
-        .send({ message: "Email or Password wrong", success: false });
+        .send({ message: "Email or Password Wrong", success: false });
     }
 
     // if there is user and password then generate token for user to secure our app
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-      expireIn: "1d",
+      expiresIn: "1d",
     });
     res
       .status(200)
-      .send({ message: "Login successfull", sucess: true, token: token });
+      .send({ message: "Login successfull", success: true, token: token });
   } catch (error) {
     console.log(error);
     res
