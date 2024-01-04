@@ -8,7 +8,8 @@ const HomePage = () => {
   const getUserData = async () => {
     try {
       const res = await axios.post(
-        "http://localhost:8080/api/v1/user/getUserData ",
+        // "http://localhost:8080/api/v1/user/getUserData ",
+        `${process.env.REACT_APP_BASE_URL}/api/v1/user/getUserData`,
         {},
         {
           headers: {
