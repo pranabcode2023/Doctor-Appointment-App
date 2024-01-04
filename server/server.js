@@ -22,6 +22,7 @@ app.use(morgan("dev"));
 //routes
 // app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/user", require("./routes/userRoutes"));
+app.use("/api/v1/admin", require("./routes/adminRoutes"));
 
 //test Purpose
 // app.get("/", (req, res) => {
