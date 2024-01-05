@@ -19,8 +19,33 @@ const Layout = ({ children }) => {
     navigate("/login");
   };
 
+  //Doctor sidemenu
+
+  const doctorSideMenu = [
+    {
+      name: "Home",
+      path: "/",
+      icon: "fa-solid fa-house-chimney-medical",
+    },
+    {
+      name: "Appointments",
+      path: "/appointments",
+      icon: "fa-solid fa-bars",
+    },
+
+    {
+      name: "Profile",
+      path: `/doctor/profile/${user?._id}`,
+      icon: "fa-solid fa-user",
+    },
+  ];
+
   //rendering Sidemenu
-  const SideMenu = user?.isAdmin ? adminSideMenu : userSideMenu;
+  const SideMenu = user?.isAdmin
+    ? adminSideMenu
+    : user?.isDoctor
+    ? doctorSideMenu
+    : userSideMenu;
 
   return (
     <>
