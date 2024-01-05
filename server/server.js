@@ -23,6 +23,7 @@ app.use(morgan("dev"));
 // app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/user", require("./routes/userRoutes"));
 app.use("/api/v1/admin", require("./routes/adminRoutes"));
+app.use("/api/v1/doctor", require("./routes/doctorRoutes"));
 
 //test Purpose
 // app.get("/", (req, res) => {
