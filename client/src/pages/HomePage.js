@@ -1,16 +1,19 @@
 import axios from "axios";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../components/Layout";
+import { Row } from "antd";
+import DoctorList from "../components/DoctorList";
 
 const HomePage = () => {
-  // get user Data
+  const [doctors, setDoctors] = useState([]);
+
+  // get Doctors Data
 
   const getUserData = async () => {
     try {
-      const res = await axios.post(
+      const res = await axios.get(
         // "http://localhost:8080/api/v1/user/getUserData ",
-        `${process.env.REACT_APP_BASE_URL}/api/v1/user/getUserData`,
-        {},
+        `${process.env.REACT_APP_BASE_URL}/api/v1/user/getAllDoctors`,
         {
           headers: {
             // must have one space after Bearer . read documentation
@@ -18,7 +21,9 @@ const HomePage = () => {
           },
         }
       );
-      console.log(res);
+      if (res.data.success) {
+        setDoctors(res.data.data);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -30,7 +35,10 @@ const HomePage = () => {
 
   return (
     <Layout>
-      <h1> HomePage</h1>
+      <h1 className="text-center"> HomePage</h1>
+      <Row>
+        {doctors && doctors.map((doctor) => <DoctorList doctor={doctor} />)}
+      </Row>
     </Layout>
   );
 };
