@@ -3,6 +3,7 @@ const { authMiddleware } = require("../middlewares/authMiddleware");
 const {
   getDoctorProfileController,
   updateDoctorProfileController,
+  getDoctorByIdController,
 } = require("../controllers/doctorController");
 
 const router = express.Router();
@@ -10,12 +11,15 @@ const router = express.Router();
 // Single doctor info( post method)
 router.post("/getDoctorProfile", authMiddleware, getDoctorProfileController);
 
-// update doctor Profile
+// update doctor Profile ( post method)
 
 router.post(
   "/updateDoctorProfile",
   authMiddleware,
   updateDoctorProfileController
 );
+
+// get single doctor Information
+router.post("/getDoctorById", authMiddleware, getDoctorByIdController);
 
 module.exports = router;
