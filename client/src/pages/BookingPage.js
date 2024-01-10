@@ -82,6 +82,10 @@ const BookingPage = () => {
 
   const handleAppointmentAvailability = async () => {
     try {
+      setIsAvailable(true);
+      if (!date && !officeTime) {
+        return message.error("Date & Office time required");
+      }
       dispatch(showLoading());
       const res = await axios.post(
         `${process.env.REACT_APP_BASE_URL}/api/v1/user/booking-availability`,
