@@ -239,6 +239,44 @@ const bookAppointmentController = async (req, res) => {
   }
 };
 
+// bookingAvailabilityController
+const bookingAvailabilityController = async (req, res) => {
+  try {
+    const date = (req.body.date, "DD-MM-YYYY");
+    const fromOfficeTime = (req.body.officeTime, "HH:mm");
+    const toOfficeTime = (req.body.officeTime, "HH:mm");
+
+    const doctorId = req.body.doctorId;
+    const appointments = await appointmentModel.find({
+      doctorId,
+      date,
+      officeTime: {
+        $gte: fromOfficeTime,
+        $lte: toOfficeTime,
+      },
+    });
+
+    if (appointments.length > 0) {
+      return res.status(200).send({
+        message: "Appointments not available at this time ",
+        success: true,
+      });
+    } else {
+      return res.status(200).send({
+        message: "Appointments Available",
+        success: true,
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "Error in Booking Availability",
+      error,
+    });
+  }
+};
+
 module.exports = {
   loginController,
   registerController,
@@ -248,4 +286,5 @@ module.exports = {
   deleteAllNotificationController,
   getAllDoctorsController,
   bookAppointmentController,
+  bookingAvailabilityController,
 };
