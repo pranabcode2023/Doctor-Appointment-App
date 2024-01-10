@@ -2,15 +2,21 @@ import React, { useEffect, useState } from "react";
 import Layout from "../components/Layout";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import { DatePicker, TimePicker } from "antd";
+import { DatePicker, TimePicker, message } from "antd";
 import moment from "moment";
+import { useSelector, useDispatch } from "react-redux";
+import { showLoading, hideLoading } from "../redux/features/alertSlice";
 
 const BookingPage = () => {
   const params = useParams();
+  const dispatch = useDispatch();
+
   const [doctors, setDoctors] = useState([]);
   const [date, setDate] = useState();
   const [officeTime, setOfficeTime] = useState();
   const [isAvailable, setIsAvailable] = useState();
+
+  const { user } = useSelector((state) => state.user);
 
   // get Doctors Data
 
@@ -31,6 +37,39 @@ const BookingPage = () => {
         setDoctors(res.data.data);
       }
     } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // handle  Booking
+  const handleBooking = async () => {
+    try {
+      dispatch(showLoading());
+      const res = await axios.post(
+        `${process.env.REACT_APP_BASE_URL}/api/v1/user/book-appointment`,
+
+        {
+          doctorId: params.doctorId,
+          userId: user._id,
+          doctorInfo: doctors,
+          userInfo: user,
+          date: date,
+          officeTime: officeTime,
+        },
+        {
+          headers: {
+            // must have one space after Bearer . read documentation
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
+      );
+
+      dispatch(hideLoading());
+      if (res.data.success) {
+        message.success(res.data.message);
+      }
+    } catch (error) {
+      dispatch(hideLoading());
       console.log(error);
     }
   };
@@ -67,21 +106,28 @@ const BookingPage = () => {
                   setDate(moment(value).format("DD-MM-YYYY"))
                 }
               />
-              <TimePicker.RangePicker
+              <TimePicker
                 className="m-2"
                 format="HH:mm"
-                onChange={(values) =>
-                  setOfficeTime(
-                    values && values.length === 2
-                      ? [
-                          moment(values[0]).format("HH:mm"),
-                          moment(values[1]).format("HH:mm"),
-                        ]
-                      : null
-                  )
+                onChange={(value) =>
+                  // setOfficeTime(
+                  //   values && values.length === 2
+                  //     ? [
+                  //         moment(values[0]).format("HH:mm"),
+                  //         moment(values[1]).format("HH:mm"),
+                  //       ]
+                  //     : null
+                  // )
+
+                  setOfficeTime(moment(value).format("HH:mm"))
                 }
               />
-              <button className="btn btn-primary">Check Availability</button>
+              <button className="btn btn-primary mt-2">
+                Check Availability
+              </button>
+              <button className="btn btn-dark mt-2" onClick={handleBooking}>
+                Book Now
+              </button>
             </div>
           </div>
         )}
