@@ -3,7 +3,7 @@ import Layout from "../components/Layout";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { DatePicker, TimePicker, message } from "antd";
-import moment from "moment";
+// import moment from "moment";
 import { useSelector, useDispatch } from "react-redux";
 import { showLoading, hideLoading } from "../redux/features/alertSlice";
 
@@ -12,8 +12,8 @@ const BookingPage = () => {
   const dispatch = useDispatch();
 
   const [doctors, setDoctors] = useState([]);
-  const [date, setDate] = useState();
-  const [officeTime, setOfficeTime] = useState();
+  const [date, setDate] = useState("");
+  const [officeTime, setOfficeTime] = useState("");
   const [isAvailable, setIsAvailable] = useState();
 
   const { user } = useSelector((state) => state.user);
@@ -44,6 +44,10 @@ const BookingPage = () => {
   // handle  Booking
   const handleBooking = async () => {
     try {
+      setIsAvailable(true);
+      if (!date && !officeTime) {
+        return message.error("Date & Office time required");
+      }
       dispatch(showLoading());
       const res = await axios.post(
         `${process.env.REACT_APP_BASE_URL}/api/v1/user/book-appointment`,
@@ -67,6 +71,40 @@ const BookingPage = () => {
       dispatch(hideLoading());
       if (res.data.success) {
         message.success(res.data.message);
+      }
+    } catch (error) {
+      dispatch(hideLoading());
+      console.log(error);
+    }
+  };
+
+  // handleAppointmentAvailability
+
+  const handleAppointmentAvailability = async () => {
+    try {
+      dispatch(showLoading());
+      const res = await axios.post(
+        `${process.env.REACT_APP_BASE_URL}/api/v1/user/booking-availability`,
+
+        {
+          doctorId: params.doctorId,
+          date: date,
+          officeTime: officeTime,
+        },
+        {
+          headers: {
+            // must have one space after Bearer . read documentation
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
+      );
+
+      dispatch(hideLoading());
+      if (res.data.success) {
+        setIsAvailable(true);
+        message.success(res.data.message);
+      } else {
+        message.error(res.data.message);
       }
     } catch (error) {
       dispatch(hideLoading());
@@ -102,9 +140,10 @@ const BookingPage = () => {
               <DatePicker
                 className="m-2"
                 format="DD-MM-YYYY"
-                onChange={(value) =>
-                  setDate(moment(value).format("DD-MM-YYYY"))
-                }
+                onChange={(value) => {
+                  setIsAvailable(false);
+                  setDate(value);
+                }}
               />
               <TimePicker
                 className="m-2"
@@ -118,16 +157,23 @@ const BookingPage = () => {
                   //       ]
                   //     : null
                   // )
-
-                  setOfficeTime(moment(value).format("HH:mm"))
+                  {
+                    setIsAvailable(false);
+                    setOfficeTime(value);
+                  }
                 }
               />
-              <button className="btn btn-primary mt-2">
+              <button
+                className="btn btn-primary mt-2"
+                onClick={handleAppointmentAvailability}
+              >
                 Check Availability
               </button>
-              <button className="btn btn-dark mt-2" onClick={handleBooking}>
-                Book Now
-              </button>
+              {!isAvailable && (
+                <button className="btn btn-dark mt-2" onClick={handleBooking}>
+                  Book Now
+                </button>
+              )}
             </div>
           </div>
         )}
