@@ -16,7 +16,7 @@ export const userSideMenu = [
   },
   {
     name: "Profile",
-    path: "/profile",
+    path: " /user/profile/:id",
     icon: "fa-solid fa-user",
   },
 ];
@@ -44,6 +44,27 @@ export const adminSideMenu = [
   {
     name: "Profile",
     path: "/profile",
+    icon: "fa-solid fa-user",
+  },
+];
+
+//doctor Sidemenu
+
+export const doctorSideMenu = [
+  {
+    name: "Home",
+    path: "/",
+    icon: "fa-solid fa-house-chimney-medical",
+  },
+  {
+    name: "Appointments",
+    path: "/doctor-appointments",
+    icon: "fa-solid fa-bars",
+  },
+
+  {
+    name: "Profile",
+    path: "/doctor/profile/:id",
     icon: "fa-solid fa-user",
   },
 ];
