@@ -32,7 +32,7 @@ const DoctorAppointmentsPage = () => {
     try {
       const res = await axios.post(
         `${process.env.REACT_APP_BASE_URL}/api/v1/doctor/update-status`,
-        { appoitmentId: record._id, status },
+        { appointmentId: record._id, status },
         {
           headers: {
             // must have one space after Bearer . read documentation
