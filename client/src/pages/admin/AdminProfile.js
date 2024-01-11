@@ -121,7 +121,7 @@ const AdminProfile = () => {
                 required
                 rules={[{ required: true }]}
               >
-                <Input type="text" placeholder="Password" />
+                <Input.Password type="password" placeholder="Password" />
               </Form.Item>
             </Col>
           </Row>
