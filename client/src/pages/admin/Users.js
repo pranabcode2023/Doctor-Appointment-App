@@ -52,7 +52,14 @@ const Users = () => {
       dataIndex: "actions",
       render: (text, record) => (
         <div className="d-flex">
-          <button className="btn btn-danger">Not Accepted</button>
+          {record.isAdmin ? null : record.isDoctor ? ( // If user is admin, show nothing
+            // If user is a doctor, show the button
+            <button className="btn btn-danger">Remove</button>
+          ) : (
+            // For other users, show the same button
+            <button className="btn btn-danger">Remove</button>
+          )}
+          {/* <button className="btn btn-danger">Not Accepted</button> */}
         </div>
       ),
     },
