@@ -50,8 +50,9 @@ const corsOptions = {
     }
   },
 };
+app.use(cors());
 
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
 
 // listen port
 
