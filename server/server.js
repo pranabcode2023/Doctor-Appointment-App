@@ -41,6 +41,10 @@ const allowedOrigins = [
   "https://doctor-appointment-app-client.vercel.app",
 ];
 
+const corsOptions = {
+  origin: allowedOrigins,
+};
+
 // const corsOptions = {
 //   origin: function (origin, callback) {
 //     if (allowedOrigins.indexOf(origin) !== -1) {
@@ -51,9 +55,9 @@ const allowedOrigins = [
 //   },
 // };
 
-// app.use(cors(corsOptions));
+app.use(cors(corsOptions));
 
-app.use(cors());
+// app.use(cors());
 
 // listen port
 
