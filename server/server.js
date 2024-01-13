@@ -43,6 +43,7 @@ const allowedOrigins = [
 
 const corsOptions = {
   origin: allowedOrigins,
+  credentials: true,
 };
 
 // const corsOptions = {
@@ -57,7 +58,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-// app.use(cors());
+app.use(cors());
 
 // listen port
 
