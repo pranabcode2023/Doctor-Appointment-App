@@ -6,6 +6,7 @@ import axios from "axios";
 
 import { useDispatch } from "react-redux";
 import { showLoading, hideLoading } from "../redux/features/alertSlice";
+import { serverURL } from "../configVercel/serverURL";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -17,7 +18,8 @@ const Login = () => {
       dispatch(showLoading());
       const res = await axios.post(
         // "http://localhost:8080/api/v1/user/login",
-        `${process.env.REACT_APP_BASE_URL}/api/v1/user/login`,
+        // `${process.env.REACT_APP_BASE_URL}/api/v1/user/login`,
+        `${serverURL}/api/v1/user/login`,
         values
       );
 
