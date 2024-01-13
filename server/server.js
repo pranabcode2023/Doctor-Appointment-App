@@ -36,27 +36,26 @@ app.use("/api/v1/doctor", require("./routes/doctorRoutes"));
 const port = process.env.PORT || 8080;
 
 //vercel deploy config
-const allowedOrigins = [
-  "http://localhost:3000",
-  "https://doctor-appointment-app-client.vercel.app",
-];
-
-const corsOptions = {
-  origin: allowedOrigins,
-  credentials: true,
-};
+// const allowedOrigins = [
+//   "http://localhost:3000",
+//   "https://doctor-appointment-app-client.vercel.app",
+// ];
 
 // const corsOptions = {
-//   origin: function (origin, callback) {
-//     if (allowedOrigins.indexOf(origin) !== -1) {
-//       callback(null, true);
-//     } else {
-//       callback(new Error("Not allowed by CORS"));
-//     }
-//   },
+//   origin: allowedOrigins,
 // };
 
-app.use(cors(corsOptions));
+// // const corsOptions = {
+// //   origin: function (origin, callback) {
+// //     if (allowedOrigins.indexOf(origin) !== -1) {
+// //       callback(null, true);
+// //     } else {
+// //       callback(new Error("Not allowed by CORS"));
+// //     }
+// //   },
+// // };
+
+// app.use(cors(corsOptions));
 
 app.use(cors());
 
