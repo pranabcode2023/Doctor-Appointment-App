@@ -27,10 +27,16 @@ app.use("/api/v1/doctor", require("./routes/doctorRoutes"));
 
 //NOTE - Rest Api
 app.get("/", (req, res) => {
-  res.status(200).send({
-    // message: "Server running sucessfully",
-    message: "Wellcome to Doctor Appointment App Mern Stack",
-  });
+  // res.status(200).send({
+  //   // message: "Server running sucessfully",
+  //   message: "Wellcome to Doctor Appointment App Mern Stack",
+
+  // });
+
+  const vercelURL =
+    "https://doctor-appointment-app-client.vercel.app" || "Local Development";
+
+  res.send(`Vercel Deployment URL : ${vercelURL}`);
 });
 
 //port
