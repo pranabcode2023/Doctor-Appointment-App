@@ -25,15 +25,35 @@ app.use("/api/v1/user", require("./routes/userRoutes"));
 app.use("/api/v1/admin", require("./routes/adminRoutes"));
 app.use("/api/v1/doctor", require("./routes/doctorRoutes"));
 
-//test Purpose
-// app.get("/", (req, res) => {
-//   res.status(200).send({
-//     message: " server running sucessfully",
-//   });
-// });
+//NOTE - Rest Api
+app.get("/", (req, res) => {
+  res.status(200).send({
+    // message: "Server running sucessfully",
+    message: "Wellcome to Doctor Appointment App Mern Stack",
+  });
+});
 
 //port
 const port = process.env.PORT || 8080;
+
+//NOTE - config for vercel deployment
+
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://doctor-appointment-app-client.vercel.app",
+];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+};
+
+app.use(cors(corsOptions));
 
 // listen port
 
