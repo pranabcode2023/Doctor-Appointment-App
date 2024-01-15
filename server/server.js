@@ -25,12 +25,12 @@ app.use("/api/v1/user", require("./routes/userRoutes"));
 app.use("/api/v1/admin", require("./routes/adminRoutes"));
 app.use("/api/v1/doctor", require("./routes/doctorRoutes"));
 
-//test Purpose
-// app.get("/", (req, res) => {
-//   res.status(200).send({
-//     message: " server running sucessfully",
-//   });
-// });
+// test Purpose
+app.get("/", (req, res) => {
+  res.status(200).send({
+    message: " server running sucessfully",
+  });
+});
 
 //port
 const port = process.env.PORT || 8080;
