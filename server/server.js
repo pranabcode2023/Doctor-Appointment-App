@@ -25,42 +25,15 @@ app.use("/api/v1/user", require("./routes/userRoutes"));
 app.use("/api/v1/admin", require("./routes/adminRoutes"));
 app.use("/api/v1/doctor", require("./routes/doctorRoutes"));
 
-// test Purpose
-app.get("/", (req, res) => {
-  // res.status(200).send({
-  //   message: " server running sucessfully",
-  // });
-  const vercelURL = [
-    "http://localhost:3000",
-    "https://doctor-appointment-app-client.vercel.app",
-  ];
-  res.send(`Vercel Deployment URL: ${vercelURL}`);
-});
+//test Purpose
+// app.get("/", (req, res) => {
+//   res.status(200).send({
+//     message: " server running sucessfully",
+//   });
+// });
 
 //port
 const port = process.env.PORT || 8080;
-
-//vercel deploy config
-const allowedOrigins = [
-  "http://localhost:3000",
-  "https://doctor-appointment-app-client.vercel.app",
-];
-
-// const corsOptions = {
-//   origin: allowedOrigins,
-// };
-
-const corsOptions = {
-  origin: function (origin, callback) {
-    if (allowedOrigins.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-};
-
-app.use(cors(corsOptions));
 
 // listen port
 
