@@ -27,9 +27,14 @@ app.use("/api/v1/doctor", require("./routes/doctorRoutes"));
 
 // test Purpose
 app.get("/", (req, res) => {
-  res.status(200).send({
-    message: " server running sucessfully",
-  });
+  // res.status(200).send({
+  //   message: " server running sucessfully",
+  // });
+  const vercelURL = [
+    "http://localhost:3000",
+    "https://doctor-appointment-app-client.vercel.app",
+  ];
+  res.send(`Vercel Deployment URL: ${vercelURL}`);
 });
 
 //port
