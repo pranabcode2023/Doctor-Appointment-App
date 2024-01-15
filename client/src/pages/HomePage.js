@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Layout from "../components/Layout";
 import { Row } from "antd";
 import DoctorList from "../components/DoctorList";
-import { serverURL } from "../vercelConfig/serverURL";
+import serverURL from "../vercelConfig/serverURL";
 
 const HomePage = () => {
   const [doctors, setDoctors] = useState([]);

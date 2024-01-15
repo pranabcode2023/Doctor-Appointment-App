@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { showLoading, hideLoading } from "../redux/features/alertSlice";
 import axios from "axios";
-import { serverURL } from "../vercelConfig/serverURL";
+import serverURL from "../vercelConfig/serverURL";
 
 const NotificationPage = () => {
   const dispatch = useDispatch();
