@@ -8,6 +8,8 @@ import { useNavigate } from "react-router-dom";
 import { showLoading, hideLoading } from "../redux/features/alertSlice";
 import axios from "axios";
 import moment from "moment";
+
+import serverURL from "../vercelConfig/serverURL";
 const ApplyDoctor = () => {
   const { user } = useSelector((state) => state.user);
 
@@ -20,7 +22,8 @@ const ApplyDoctor = () => {
       dispatch(showLoading());
 
       const res = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}/api/v1/user/apply-doctor`,
+        // `${process.env.REACT_APP_BASE_URL}/api/v1/user/apply-doctor`,
+        `${serverURL}/api/v1/user/apply-doctor`,
         {
           ...values,
           userId: user._id,

@@ -3,14 +3,15 @@ import axios from "axios";
 import { Table, message } from "antd";
 import moment from "moment";
 import Layout from "../../components/Layout";
-
+import serverURL from "../../vercelConfig/serverURL";
 const DoctorAppointmentsPage = () => {
   const [appointments, setAppointments] = useState([]);
 
   const getAppointments = async () => {
     try {
       const res = await axios.get(
-        `${process.env.REACT_APP_BASE_URL}/api/v1/doctor/doctor-appointments`,
+        // `${process.env.REACT_APP_BASE_URL}/api/v1/doctor/doctor-appointments`,
+        `${serverURL}/api/v1/doctor/doctor-appointments`,
         {
           headers: {
             // must have one space after Bearer . read documentation
@@ -31,7 +32,8 @@ const DoctorAppointmentsPage = () => {
   const handleStatus = async (record, status) => {
     try {
       const res = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}/api/v1/doctor/update-status`,
+        // `${process.env.REACT_APP_BASE_URL}/api/v1/doctor/update-status`,
+        `${serverURL}/api/v1/doctor/update-status`,
         { appointmentId: record._id, status },
         {
           headers: {

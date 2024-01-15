@@ -10,7 +10,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { showLoading, hideLoading } from "../../redux/features/alertSlice";
 import moment from "moment";
-
+import serverURL from "../../vercelConfig/serverURL";
 const DoctorProfile = () => {
   const params = useParams();
   const { user } = useSelector((state) => state.user);
@@ -25,7 +25,8 @@ const DoctorProfile = () => {
       dispatch(showLoading());
 
       const res = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}/api/v1/doctor/updateDoctorProfile`,
+        // `${process.env.REACT_APP_BASE_URL}/api/v1/doctor/updateDoctorProfile`,
+        `${serverURL}/api/v1/doctor/updateDoctorProfile`,
         {
           ...values,
           userId: user._id,
@@ -62,7 +63,8 @@ const DoctorProfile = () => {
   const getDoctorProfile = async () => {
     try {
       const res = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}/api/v1/doctor/getDoctorProfile`,
+        // `${process.env.REACT_APP_BASE_URL}/api/v1/doctor/getDoctorProfile`,
+        `${serverURL}/api/v1/doctor/updateDoctorProfile`,
         { userId: params.id },
         {
           headers: {

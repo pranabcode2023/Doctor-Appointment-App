@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Layout from "../../components/Layout";
 import axios from "axios";
 import { Table, message } from "antd";
-
+import serverURL from "../../vercelConfig/serverURL";
 const Users = () => {
   const [users, setUsers] = useState([]);
 
@@ -10,7 +10,8 @@ const Users = () => {
   const getUsers = async () => {
     try {
       const res = await axios.get(
-        `${process.env.REACT_APP_BASE_URL}/api/v1/admin/getAllUsers`,
+        // `${process.env.REACT_APP_BASE_URL}/api/v1/admin/getAllUsers`,
+        `${serverURL}/api/v1/admin/getAllUsers`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -30,7 +31,8 @@ const Users = () => {
   const handleRemoveUser = async (record) => {
     try {
       const res = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}/api/v1/admin/removeUser`,
+        // `${process.env.REACT_APP_BASE_URL}/api/v1/admin/removeUser`,
+        `${serverURL}/api/v1/admin/removeUser`,
         { userId: record._id }, // Assuming _id is the user ID
         {
           headers: {

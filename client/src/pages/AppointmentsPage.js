@@ -3,14 +3,15 @@ import Layout from "./../components/Layout";
 import axios from "axios";
 import { Table } from "antd";
 import moment from "moment";
-
+import serverURL from "../vercelConfig/serverURL";
 const AppointmentsPage = () => {
   const [appointments, setAppointments] = useState([]);
 
   const getAppointments = async () => {
     try {
       const res = await axios.get(
-        `${process.env.REACT_APP_BASE_URL}/api/v1/user/user-appointments`,
+        // `${process.env.REACT_APP_BASE_URL}/api/v1/user/user-appointments`,
+        `${serverURL}/api/v1/user/user-appointments`,
         {
           headers: {
             // must have one space after Bearer . read documentation

@@ -9,7 +9,7 @@ import { Form, Row, Col, Input, message } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { showLoading, hideLoading } from "../../redux/features/alertSlice";
-
+import serverURL from "../../vercelConfig/serverURL";
 const AdminProfile = () => {
   const params = useParams();
   const { user } = useSelector((state) => state.user);
@@ -24,7 +24,8 @@ const AdminProfile = () => {
       dispatch(showLoading());
 
       const res = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}/api/v1/admin/updateAdminProfile`,
+        // `${process.env.REACT_APP_BASE_URL}/api/v1/admin/updateAdminProfile`,
+        `${serverURL}/api/v1/admin/updateAdminProfile`,
         {
           ...values,
           userId: user._id,
@@ -57,7 +58,8 @@ const AdminProfile = () => {
   const getAdminProfile = async () => {
     try {
       const res = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}/api/v1/admin/getAdminProfile`,
+        // `${process.env.REACT_APP_BASE_URL}/api/v1/admin/getAdminProfile`,
+        `${serverURL}/api/v1/admin/getAdminProfile`,
         { userId: params.id },
         {
           headers: {
