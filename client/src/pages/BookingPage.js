@@ -6,6 +6,7 @@ import { DatePicker, TimePicker, message } from "antd";
 // import moment from "moment";
 import { useSelector, useDispatch } from "react-redux";
 import { showLoading, hideLoading } from "../redux/features/alertSlice";
+import { serverURL } from "../vercelConfig/serverURL";
 
 const BookingPage = () => {
   const params = useParams();
@@ -24,7 +25,8 @@ const BookingPage = () => {
     try {
       const res = await axios.post(
         // "http://localhost:8080/api/v1/user/getUserData ",
-        `${process.env.REACT_APP_BASE_URL}/api/v1/doctor/getDoctorById`,
+        // `${process.env.REACT_APP_BASE_URL}/api/v1/doctor/getDoctorById`,
+        `${serverURL}/api/v1/doctor/getDoctorById`,
         { doctorId: params.doctorId },
         {
           headers: {
@@ -50,7 +52,8 @@ const BookingPage = () => {
       }
       dispatch(showLoading());
       const res = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}/api/v1/user/book-appointment`,
+        // `${process.env.REACT_APP_BASE_URL}/api/v1/user/book-appointment`,
+        `${serverURL}/api/v1/user/book-appointment`,
 
         {
           doctorId: params.doctorId,
@@ -88,8 +91,8 @@ const BookingPage = () => {
       }
       dispatch(showLoading());
       const res = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}/api/v1/user/booking-availability`,
-
+        // `${process.env.REACT_APP_BASE_URL}/api/v1/user/booking-availability`,
+        `${serverURL}/api/v1/user/booking-availability`,
         {
           doctorId: params.doctorId,
           date: date,

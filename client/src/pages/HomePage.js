@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Layout from "../components/Layout";
 import { Row } from "antd";
 import DoctorList from "../components/DoctorList";
+import { serverURL } from "../vercelConfig/serverURL";
 
 const HomePage = () => {
   const [doctors, setDoctors] = useState([]);
@@ -13,7 +14,8 @@ const HomePage = () => {
     try {
       const res = await axios.get(
         // "http://localhost:8080/api/v1/user/getUserData ",
-        `${process.env.REACT_APP_BASE_URL}/api/v1/user/getAllDoctors`,
+        // `${process.env.REACT_APP_BASE_URL}/api/v1/user/getAllDoctors`,
+        `${serverURL}/api/v1/user/getAllDoctors`,
         {
           headers: {
             // must have one space after Bearer . read documentation

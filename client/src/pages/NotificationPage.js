@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { showLoading, hideLoading } from "../redux/features/alertSlice";
 import axios from "axios";
+import { serverURL } from "../vercelConfig/serverURL";
 
 const NotificationPage = () => {
   const dispatch = useDispatch();
@@ -15,7 +16,8 @@ const NotificationPage = () => {
     try {
       dispatch(showLoading());
       const res = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}/api/v1/user/get-all-notification`,
+        // `${process.env.REACT_APP_BASE_URL}/api/v1/user/get-all-notification`,
+        `${serverURL}/api/v1/user/get-all-notification`,
         { userId: user._id },
         {
           headers: {
@@ -44,7 +46,8 @@ const NotificationPage = () => {
     try {
       dispatch(showLoading());
       const res = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}/api/v1/user/delete-all-notification`,
+        // `${process.env.REACT_APP_BASE_URL}/api/v1/user/delete-all-notification`,
+        `${serverURL}/api/v1/user/delete-all-notification`,
         { userId: user._id },
         {
           headers: {

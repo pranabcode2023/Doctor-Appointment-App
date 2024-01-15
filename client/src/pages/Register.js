@@ -5,6 +5,7 @@ import "../styles/RegisterStyles.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { showLoading, hideLoading } from "../redux/features/alertSlice";
+import { serverURL } from "../vercelConfig/serverURL";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ const Register = () => {
       const res = await axios.post(
         // "http://localhost:8080/api/v1/user/register",
         `${process.env.REACT_APP_BASE_URL}/api/v1/user/register`,
-
+        `${serverURL}/api/v1/user/register`,
         values
       );
 
