@@ -115,7 +115,7 @@ const UserProfile = () => {
               </Form.Item>
             </Col>
 
-            <Col xs={24} md={24} lg={8}>
+            {/* <Col xs={24} md={24} lg={8}>
               <Form.Item
                 label="Password"
                 name="password"
@@ -124,7 +124,7 @@ const UserProfile = () => {
               >
                 <Input type="text" placeholder="Password" />
               </Form.Item>
-            </Col>
+            </Col> */}
           </Row>
 
           <div className="d-flex justify-content-end">
