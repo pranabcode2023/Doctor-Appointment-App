@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 // import { hideLoading, showLoading } from "../redux/features/alertSlice";
 import axios from "axios";
 import { setUser } from "../redux/features/userSlice";
+import { serverURL } from "../vercelConfig/serverURL";
 
 export default function ProtectedRoute({ children }) {
   const dispatch = useDispatch();
@@ -16,7 +17,9 @@ export default function ProtectedRoute({ children }) {
     const getUser = async () => {
       try {
         const res = await axios.post(
-          "http://localhost:8080/api/v1/user/getUserData ",
+          // "http://localhost:8080/api/v1/user/getUserData ",
+          // `${process.env.REACT_APP_BASE_URL}/api/v1/user/getUserData`,
+          `${serverURL}/api/v1/user/getUserData`,
           { token: localStorage.getItem("token") },
           {
             headers: {
