@@ -9,7 +9,7 @@ import { Form, Row, Col, Input, message } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { showLoading, hideLoading } from "../../redux/features/alertSlice";
-import serverURL from "../../vercelConfig/serverURL";
+import { serverURL } from "../../vercelConfig/serverURL";
 const UserProfile = () => {
   const params = useParams();
   const { user } = useSelector((state) => state.user);

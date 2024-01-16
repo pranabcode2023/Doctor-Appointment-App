@@ -6,7 +6,7 @@ import { DatePicker, TimePicker, message } from "antd";
 // import moment from "moment";
 import { useSelector, useDispatch } from "react-redux";
 import { showLoading, hideLoading } from "../redux/features/alertSlice";
-import serverURL from "../vercelConfig/serverURL";
+import { serverURL } from "../vercelConfig/serverURL";
 
 const BookingPage = () => {
   const params = useParams();

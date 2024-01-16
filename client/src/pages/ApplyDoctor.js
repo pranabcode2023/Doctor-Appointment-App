@@ -9,7 +9,7 @@ import { showLoading, hideLoading } from "../redux/features/alertSlice";
 import axios from "axios";
 import moment from "moment";
 
-import serverURL from "../vercelConfig/serverURL";
+import { serverURL } from "../vercelConfig/serverURL";
 const ApplyDoctor = () => {
   const { user } = useSelector((state) => state.user);
 

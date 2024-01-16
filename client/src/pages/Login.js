@@ -6,7 +6,7 @@ import axios from "axios";
 
 import { useDispatch } from "react-redux";
 import { showLoading, hideLoading } from "../redux/features/alertSlice";
-import serverURL from "../vercelConfig/serverURL";
+import { serverURL } from "../vercelConfig/serverURL";
 
 const Login = () => {
   const navigate = useNavigate();

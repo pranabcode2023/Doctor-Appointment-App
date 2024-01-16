@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Layout from "../../components/Layout";
 import axios from "axios";
 import { Table, message } from "antd";
-import serverURL from "../../vercelConfig/serverURL";
+import { serverURL } from "../../vercelConfig/serverURL";
 const Users = () => {
   const [users, setUsers] = useState([]);
 

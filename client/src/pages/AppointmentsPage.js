@@ -3,7 +3,7 @@ import Layout from "./../components/Layout";
 import axios from "axios";
 import { Table } from "antd";
 import moment from "moment";
-import serverURL from "../vercelConfig/serverURL";
+import { serverURL } from "../vercelConfig/serverURL";
 const AppointmentsPage = () => {
   const [appointments, setAppointments] = useState([]);
 

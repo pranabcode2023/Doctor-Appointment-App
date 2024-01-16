@@ -10,7 +10,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { showLoading, hideLoading } from "../../redux/features/alertSlice";
 import moment from "moment";
-import serverURL from "../../vercelConfig/serverURL";
+import { serverURL } from "../../vercelConfig/serverURL";
 const DoctorProfile = () => {
   const params = useParams();
   const { user } = useSelector((state) => state.user);
